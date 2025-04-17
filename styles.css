@@ -8,8 +8,8 @@
 /* Body and Font Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #000; /* Set background to black for all pages */
+    color: #fff;  /* Set text color to white for readability */
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -19,7 +19,7 @@ body {
 
 /* Container for Forms (Login and SignUp) */
 .container {
-    background-color: white;
+    background-color: #222; /* Slightly darker container for contrast */
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@ body {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #fff;  /* White text for heading */
 }
 
 /* Input Fields */
@@ -81,11 +81,11 @@ p {
 /* Main Page Styles */
 .main-container {
     text-align: center;
-    padding: 50px;
+    padding: 10px;
 }
 
 h1 {
-    color: #333;
+    color: #00ccff; /* Light blue for headings */
     font-size: 32px;
 }
 
@@ -104,6 +104,7 @@ h1 {
         font-size: 14px;
     }
 }
+
 /* Styling for images */
 .image {
     max-width: 60%;  /* Makes the image responsive */

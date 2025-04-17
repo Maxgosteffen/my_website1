@@ -1,34 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Style fix to allow scrolling back to the top -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;  /* Prevent horizontal scrolling */
+        }
+
+        .login-container {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling */
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" required><br><br>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required><br><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required><br><br>
 
-            <button type="submit">Login</button>
-        </form>
+            <label>
+                <input type="checkbox" id="rememberMe"> Remember Me
+            </label><br><br>
 
-        <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
-    </div>
+            <button type="submit">Login</button>
+            <p id="loginMessage" style="color:red;"></p>
+        </form>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            window.location.href = 'main.html';  // Redirect to the main page after successful login
-        });
-    </script>
+        <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+
+    <script>
+        // Auto-redirect if already logged in
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'main.html';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const storedData = JSON.parse(localStorage.getItem('userAccount'));
+
+            if (storedData && storedData.username === username && storedData.password === password) {
+                if (rememberMe) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                }
+                sessionStorage.setItem('isLoggedInSession', 'true'); // used for current session
+                window.location.href = 'main.html';
+            } else {
+                document.getElementById('loginMessage').textContent = 'Invalid username or password.';
+            }
+        });
+    </script>
 
 </body>
 </html>

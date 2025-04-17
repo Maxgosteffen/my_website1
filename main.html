@@ -5,22 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 0;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #00ccff;
+            color: black;
+            border: none;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .interactive-text {
+            color: #00ccff;
+            text-decoration: underline;
+            margin-top: 10px;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+
+        .interactive-text:hover {
+            color: #ffffff;
+        }
+
+        .main-container {
+            padding: 20px;
+            border: 2px solid grey;
+            border-radius: 8px;
+            margin: 10px auto;
+            background-color: #111;
+            max-width: 700px; /* Maximum width adjusted */
+            margin-top: 20px;
+            box-sizing: border-box;  /* Ensures padding doesn't affect the size */
+        }
+
+        .main-container h1 {
+            margin-top: 0;
+            color: #00ccff;
+            font-size: 1.4em; /* Reduced font size */
+        }
+
+        .main-container p {
+            margin-top: 5px;
+            font-size: 0.8em; /* Smaller font size */
+        }
+
+        .article-logo {
+            width: 120px; /* Reduced logo size */
+            margin: 15px auto 10px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .tiny-logo {
+            width: 40px; /* Smaller logo sizes */
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .main-container h1 {
+                font-size: 1.2em; /* Further reduction for mobile */
+            }
+
+            .main-container p {
+                font-size: 0.75em;
+            }
+
+            .interactive-text {
+                font-size: 0.8em;
+            }
+
+            .logout-btn {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+
+            .article-logo {
+                width: 100px; /* Even smaller logo for mobile */
+            }
+
+            .tiny-logo {
+                width: 30px; /* Even smaller tiny logos */
+            }
+
+            .main-container {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <h1>Welcome to the Main Page</h1>
-        <p>This is where the main content will go.</p>
-        
-        <!-- Add Image 1 -->
-        <img src="image1.png" alt="Image 1" class="image">
+    <!-- Login Check -->
+    <script>
+        if (
+            localStorage.getItem('isLoggedIn') !== 'true' &&
+            sessionStorage.getItem('isLoggedInSession') !== 'true'
+        ) {
+            window.location.href = 'index.html';
+        }
+    </script>
 
-        <!-- Add Image 2 -->
-        <img src="image2.png" alt="Image 2" class="image">
-        
-        <!-- Add Image 3 -->
-        <img src="image3.jpg" alt="Image 3" class="image">
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="logout-btn">Logout</button>
+
+    <!-- Main content container with grey border -->
+    <div class="main-container">
+        <h1>Football Article and News</h1>
+        <p>Footy news for you.</p>
+
+        <!-- Tiny Logo Images -->
+        <div class="image-container">
+            <img src="image2.png" alt="Logo 2" class="tiny-logo">
+            <img src="image3.png" alt="Logo 3" class="tiny-logo">
+        </div>
+
+        <!-- Main Logo Above Article Title -->
+        <img src="image1.png" alt="Main Article Image" class="article-logo">
+
+        <!-- Link to Article Page -->
+        <a href="article.html" class="interactive-text">
+            The Greatest XI of All Time According to Brazilian R9
+        </a>
     </div>
+
+    <!-- Logout Script -->
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('isLoggedInSession');
+            window.location.href = 'index.html';
+        });
+    </script>
 
 </body>
 </html>
